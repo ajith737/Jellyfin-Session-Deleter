@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Session Deleter</title>
+</head>
+<body>
+    <div id="SessionDeleterConfigPage" data-role="page" class="page type-interior pluginConfigurationPage sessionDeleterConfigurationPage" data-require="emby-input,emby-button,emby-checkbox">
+        <div data-role="content">
+            <div class="content-primary">
+                <form id="SessionDeleterConfigForm">
+                    <div class="verticalSection verticalSection-extrabottompadding">
+                        <div class="sectionTitleContainer flex align-items-center">
+                            <h2 class="sectionTitle">Session Deleter Settings:</h2>
+                        </div>
+                        <div class="verticalSection verticalSection-extrabottompadding">
+                            <div class="inputContainer">
+                                <input is="emby-input" type="number" id="txtMaxSessionsPerUser" min="1" label="Max Sessions Per User:" />
+                                <div class="fieldDescription">Maximum number of device sessions allowed per user. Devices exceeding this limit will be deleted, starting with the least recently used.</div>
+                            </div>
+                            <div class="checkboxContainer checkboxContainer-withDescription">
+                                <label>
+                                    <input is="emby-checkbox" type="checkbox" id="chkDryRun" />
+                                    <span>Dry Run</span>
+                                </label>
+                                <div class="fieldDescription checkboxFieldDescription">When enabled, the task only logs which devices would be deleted and does not delete any device sessions.</div>
+                            </div>
+                        </div>
+                        <div>
+                            <button is="emby-button" type="submit" data-theme="b" class="raised button-submit block">
+                                <span>${Save}</span>
+                            </button>
+                            <button is="emby-button" type="button" class="raised button-cancel block btnCancel" onclick="history.back();">
+                                <span>${ButtonCancel}</span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <script type="text/javascript">
+            var SessionDeleterConfigurationPage = {
+                pluginUniqueId: "a4c1f9d2-7e3b-4f6a-9d8c-2b5e1f0a3c7d",
+                txtMaxSessionsPerUser: document.querySelector("#txtMaxSessionsPerUser"),
+                chkDryRun: document.querySelector("#chkDryRun")
+            };
+
+            document.querySelector("#SessionDeleterConfigPage").addEventListener("pageshow", function () {
+                Dashboard.showLoadingMsg();
+                window.ApiClient.getPluginConfiguration(SessionDeleterConfigurationPage.pluginUniqueId).then(function (config) {
+                    SessionDeleterConfigurationPage.txtMaxSessionsPerUser.value = config.MaxSessionsPerUser || "5";
+                    SessionDeleterConfigurationPage.chkDryRun.checked = !!config.DryRun;
+                    Dashboard.hideLoadingMsg();
+                });
+            });
+
+            document.querySelector("#SessionDeleterConfigForm").addEventListener("submit", function(e){
+                e.preventDefault();
+                Dashboard.showLoadingMsg();
+                window.ApiClient.getPluginConfiguration(SessionDeleterConfigurationPage.pluginUniqueId).then(function (config) {
+                    config.MaxSessionsPerUser = parseInt(SessionDeleterConfigurationPage.txtMaxSessionsPerUser.value, 10);
+                    config.DryRun = SessionDeleterConfigurationPage.chkDryRun.checked;
+                    window.ApiClient.updatePluginConfiguration(SessionDeleterConfigurationPage.pluginUniqueId, config).then(Dashboard.processPluginConfigurationUpdateResult);
+                });
+                return false;
+            });
+        </script>
+    </div>
+</body>
+</html>

@@ -1,0 +1,20 @@
+[
+  {
+    "guid": "a4c1f9d2-7e3b-4f6a-9d8c-2b5e1f0a3c7d",
+    "name": "Session Deleter",
+    "description": "Deletes the least recently used device sessions for users who exceed the configured max session limit.",
+    "overview": "Deletes excess device sessions per user based on a configurable limit.",
+    "owner": "ajith737",
+    "category": "General",
+    "versions": [
+      {
+        "version": "1.0.0.0",
+        "changelog": "Initial release with max sessions per user and dry-run mode.",
+        "targetAbi": "10.11.0.0",
+        "sourceUrl": "https://github.com/ajith737/Jellyfin-Session-Deleter/releases/download/v1.0.0.0/SessionDeleter_1.0.0.0.zip",
+        "checksum": "f53b4498a32c7b0b9101ab23f04ce0d0",
+        "timestamp": "2026-04-10T20:46:06Z"
+      }
+    ]
+  }
+]

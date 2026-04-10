@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Jellyfin.Plugin.SessionDeleter</name>
+    </assembly>
+    <members>
+        <member name="T:Jellyfin.Plugin.SessionDeleter.Configuration.PluginConfiguration">
+            <summary>
+            Plugin configuration.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Plugin.SessionDeleter.Configuration.PluginConfiguration.MaxSessionsPerUser">
+            <summary>
+            Gets or sets the maximum number of sessions (devices) allowed per user.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Plugin.SessionDeleter.Configuration.PluginConfiguration.DryRun">
+            <summary>
+            Gets or sets a value indicating whether the task should run in dry-run mode.
+            </summary>
+        </member>
+        <member name="T:Jellyfin.Plugin.SessionDeleter.SessionDeleterPlugin">
+            <summary>
+            Plugin entrypoint.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Plugin.SessionDeleter.SessionDeleterPlugin.#ctor(MediaBrowser.Common.Configuration.IApplicationPaths,MediaBrowser.Model.Serialization.IXmlSerializer)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Jellyfin.Plugin.SessionDeleter.SessionDeleterPlugin"/> class.
+            </summary>
+            <param name="applicationPaths">Instance of the <see cref="T:MediaBrowser.Common.Configuration.IApplicationPaths"/> interface.</param>
+            <param name="xmlSerializer">Instance of the <see cref="T:MediaBrowser.Model.Serialization.IXmlSerializer"/> interface.</param>
+        </member>
+        <member name="P:Jellyfin.Plugin.SessionDeleter.SessionDeleterPlugin.Instance">
+            <summary>
+            Gets the current plugin instance.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Plugin.SessionDeleter.SessionDeleterPlugin.Id">
+            <inheritdoc />
+        </member>
+        <member name="P:Jellyfin.Plugin.SessionDeleter.SessionDeleterPlugin.Name">
+            <inheritdoc />
+        </member>
+        <member name="P:Jellyfin.Plugin.SessionDeleter.SessionDeleterPlugin.Description">
+            <inheritdoc />
+        </member>
+        <member name="M:Jellyfin.Plugin.SessionDeleter.SessionDeleterPlugin.GetPages">
+            <inheritdoc />
+        </member>
+        <member name="T:Jellyfin.Plugin.SessionDeleter.ScheduledTasks.SessionDeleterTask">
+            <summary>
+            Scheduled task that deletes excess device sessions per user.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Plugin.SessionDeleter.ScheduledTasks.SessionDeleterTask.#ctor(MediaBrowser.Controller.Devices.IDeviceManager,MediaBrowser.Controller.Library.IUserManager,Microsoft.Extensions.Logging.ILogger{Jellyfin.Plugin.SessionDeleter.ScheduledTasks.SessionDeleterTask})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Jellyfin.Plugin.SessionDeleter.ScheduledTasks.SessionDeleterTask"/> class.
+            </summary>
+            <param name="deviceManager">Instance of the <see cref="T:MediaBrowser.Controller.Devices.IDeviceManager"/> interface.</param>
+            <param name="userManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.IUserManager"/> interface.</param>
+            <param name="logger">Instance of the <see cref="T:Microsoft.Extensions.Logging.ILogger`1"/> interface.</param>
+        </member>
+        <member name="P:Jellyfin.Plugin.SessionDeleter.ScheduledTasks.SessionDeleterTask.Name">
+            <inheritdoc />
+        </member>
+        <member name="P:Jellyfin.Plugin.SessionDeleter.ScheduledTasks.SessionDeleterTask.Key">
+            <inheritdoc />
+        </member>
+        <member name="P:Jellyfin.Plugin.SessionDeleter.ScheduledTasks.SessionDeleterTask.Description">
+            <inheritdoc />
+        </member>
+        <member name="P:Jellyfin.Plugin.SessionDeleter.ScheduledTasks.SessionDeleterTask.Category">
+            <inheritdoc />
+        </member>
+        <member name="M:Jellyfin.Plugin.SessionDeleter.ScheduledTasks.SessionDeleterTask.ExecuteAsync(System.IProgress{System.Double},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Jellyfin.Plugin.SessionDeleter.ScheduledTasks.SessionDeleterTask.GetDefaultTriggers">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

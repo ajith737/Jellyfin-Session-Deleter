@@ -1,0 +1,15 @@
+---
+name: "Session Deleter"
+guid: "a4c1f9d2-7e3b-4f6a-9d8c-2b5e1f0a3c7d"
+version: 1
+targetAbi: "10.11.0.0"
+framework: "net9.0"
+owner: "kiraa"
+overview: "Deletes excess device sessions per user based on a configurable limit."
+description: >
+  Deletes the least recently used device sessions for users who exceed the configured max session limit.
+category: "General"
+artifacts:
+  - "Jellyfin.Plugin.SessionDeleter.dll"
+changelog: |-
+  - Initial release
