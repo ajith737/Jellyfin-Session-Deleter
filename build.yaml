@@ -12,4 +12,4 @@ category: "General"
 artifacts:
   - "Jellyfin.Plugin.SessionDeleter.dll"
 changelog: |-
-  - Initial release
+  - Fix compatibility with Jellyfin 10.11.10 (IUserManager.GetUsers() and simplified device deletion)

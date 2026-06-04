@@ -55,7 +55,7 @@ public class SessionDeleterTask : IScheduledTask
 
         var maxSessions = SessionDeleterPlugin.Instance.Configuration.MaxSessionsPerUser;
         var dryRun = SessionDeleterPlugin.Instance.Configuration.DryRun;
-        var users = _userManager.Users.ToList();
+        var users = _userManager.GetUsers().ToList();
         var processedUsers = 0;
 
         foreach (var user in users)
@@ -77,12 +77,6 @@ public class SessionDeleterTask : IScheduledTask
                 .ToList();
 
             var devicesToDelete = sortedDevices.Take(devices.Count - maxSessions);
-            var idType = sortedDevices[0].Id.GetType();
-            var deleteById = _deviceManager.GetType()
-                .GetMethods()
-                .FirstOrDefault(m => m.Name == "DeleteDevice"
-                    && m.GetParameters().Length == 1
-                    && m.GetParameters()[0].ParameterType == idType);
 
             foreach (var device in devicesToDelete)
             {
@@ -102,18 +96,7 @@ public class SessionDeleterTask : IScheduledTask
                     device.DeviceName,
                     device.DateLastActivity);
 
-                if (deleteById is not null)
-                {
-                    var deleteTask = (Task?)deleteById.Invoke(_deviceManager, new object[] { device.Id });
-                    if (deleteTask is not null)
-                    {
-                        await deleteTask.ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    await _deviceManager.DeleteDevice(device).ConfigureAwait(false);
-                }
+                await _deviceManager.DeleteDevice(device).ConfigureAwait(false);
             }
 
             processedUsers++;
