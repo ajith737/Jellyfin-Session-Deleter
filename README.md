@@ -26,6 +26,8 @@ Place the compiled `Jellyfin.Plugin.SessionDeleter.dll` into your Jellyfin plugi
 
 ## Building
 
+Requires the .NET 10 SDK. Targets Jellyfin 12.0.
+
 ```bash
 dotnet build Jellyfin.Plugin.SessionDeleter/Jellyfin.Plugin.SessionDeleter.csproj --configuration Release
 ```
